@@ -162,20 +162,20 @@ function deprecated(name) {
 }
 
 Permissions.prototype = {
-    checkPermission: function(permission, successCallback, errorCallback) {
-        cordova.exec(successCallback, errorCallback, permissionsName, 'checkPermission', [permission]);
+    checkPermission: function(permission) {
+        return new Promise((resolve, reject) => {
+            cordova.exec(function(result) { resolve(result) }, function(error) { reject(error) }, permissionsName, 'checkPermission', [permission]);
+        });
     },
-    requestPermission: function(permission, successCallback, errorCallback) {
-        if (typeof permission === "function") {
-            deprecated("requestPermission");
-            successCallback = arguments[0];
-            errorCallback = arguments[1];
-            permission = arguments[2];
-        }
-        cordova.exec(successCallback, errorCallback, permissionsName, 'requestPermission', [permission]);
+    requestPermission: function(permission) {
+        return new Promise((resolve, reject) => {
+            cordova.exec(function(result) { resolve(result) }, function(error) { reject(error) }, permissionsName, 'requestPermission', [permission]);
+        });
     },
-    requestPermissions: function(permissions, successCallback, errorCallback) {
-        cordova.exec(successCallback, errorCallback, permissionsName, 'requestPermissions', permissions);
+    requestPermissions: function(permissions) {
+        return new Promise((resolve, reject) => {
+            cordova.exec(function(result) { resolve(result) }, function(error) { reject(error) }, permissionsName, 'requestPermissions', permissions);
+        });
     }
 };
 
